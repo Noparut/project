@@ -1,0 +1,23 @@
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]>=20 and [Pulse1#FlowRate(L/min)]<=40 //ปกติ
+    gpio,14,1  //ไฟเขียวติด เพราะต่อแบบNC
+  else
+    gpio,14,0  //ไฟเขียวดับ
+endif
+enddo
+
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]<19  //ถ้าflowrateต่ำ
+    gpio,3,1  //ไฟเหลืองติด เพราะต่อแบบNC
+  else
+    gpio,3,0  //ไฟเหลืองดับ
+endif
+enddo
+
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]>41  //ถ้าflowrateเกิน
+    gpio,16,1  //ไฟแดงติด เพราะต่อแบบNC
+  else
+    gpio,16,0  //ไฟแดงดับ
+endif
+enddo
