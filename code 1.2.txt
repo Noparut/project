@@ -1,0 +1,42 @@
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]>=20 and [Pulse1#FlowRate(L/min)]<=40 //ปกติ
+    gpio,14,1  //ไฟเขียวติด เพราะต่อแบบNC
+    gpio,15,1  //โซลินอยทำงาน
+  else
+    gpio,14,0  //ไฟเขียวดับ
+    gpio,15,0  //โซลินอยตัด
+endif
+enddo
+
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]<19  //ถ้าflowrateต่ำ
+    event,relay2  //ไฟเหลืองติด เพราะต่อแบบNC
+    timerSet,1,1
+  else
+    gpio,3,0  //ไฟเหลืองดับ
+endif
+enddo
+
+on Pulse1#FlowRate(L/min) do
+  if [Pulse1#FlowRate(L/min)]>41  //ถ้าflowrateเกิน
+    event,relay3  //ไฟแดงติด เพราะต่อแบบNC
+    timerSet,1,1
+  else
+    gpio,16,0  //ไฟแดงดับ
+endif
+enddo
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+on relay2 do
+ gpio,3,1
+endon
+
+on relay3 do
+ gpio,16,1
+endon
+
+
+
+ 
+
